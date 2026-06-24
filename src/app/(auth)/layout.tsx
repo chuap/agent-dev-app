@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Prompt, Roboto, Lora } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "../globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const loraHeading = Lora({subsets:['latin'],variable:'--font-heading'});
 
@@ -28,9 +29,12 @@ export default function AuthLayout({
     <html
       lang="th"
       className={cn(promptFont.className, "font-sans", roboto.variable, loraHeading.variable)}
+      suppressHydrationWarning
     >
       <body>
-        {children}
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

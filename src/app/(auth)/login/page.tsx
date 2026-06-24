@@ -118,7 +118,7 @@ export default function LoginForm() {
           </FieldGroup>
         </form>
       </CardContent>
-      <CardFooter className="flex flex-col gap-3">
+      <CardFooter  className="flex flex-col gap-3">
         <Button type="submit" form="form-login" className="w-full">
           เข้าสู่ระบบ
         </Button>

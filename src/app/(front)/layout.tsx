@@ -2,6 +2,8 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import "../globals.css";
 import Navbar from "@/components/navbar";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "ระบบ E-Commerce",
@@ -14,12 +16,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="th" className="font-sans">
+    <html lang="th" className="font-sans" suppressHydrationWarning>
       <body>
-        <Suspense fallback={<div className="h-16 border-b bg-background" />}>
-        <Navbar />
-        </Suspense>
-        {children}
+        <ThemeProvider>
+          <Suspense fallback={<div className="h-16 border-b bg-background" />}>
+          <Navbar />
+          </Suspense>
+          {children}
+          <Toaster richColors />
+        </ThemeProvider>
       </body>
     </html>
   );
