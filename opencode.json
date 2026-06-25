@@ -9,6 +9,20 @@
       "rm *": "ask"
     }
   },
+  "skills": {
+    "git-commit-guide": {
+      "enabled": true,
+      "path": ".agents/skills/git-commit-guide"
+    },
+    "frontend-design": {
+      "enabled": true,
+      "path": ".agents/skills/frontend-design"
+    },
+    "review-architecture-project": {
+      "enabled": true,
+      "path": ".agents/skills/review-architecture-project"
+    }
+  },
   "mcp": {
     "next-devtools": {
       "type": "local",
