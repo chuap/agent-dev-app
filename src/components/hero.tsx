@@ -19,7 +19,7 @@ export default function Hero() {
           className="mb-6 rounded-full border-primary/20 font-mono text-[11px] tracking-[0.12em] uppercase text-primary"
         >
           <span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_rgba(34,197,94,0.5)]" />
-          INVAPP V5 · Intelligence Terminal
+          COURSE · Intelligence Terminal
         </Badge>
 
         <h1 className="font-heading text-balance text-4xl font-bold leading-[1.15] tracking-tight sm:text-5xl md:text-6xl">
