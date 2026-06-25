@@ -8,6 +8,9 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 Thai-language e-commerce learning app. Next.js 16 + React 19, MariaDB, Prisma v7, better-auth, shadcn/ui (radix-luma), Zustand.
 
+# Development Guideline
+for TypeScript code styles : @Ddocs/typescript-guidelines.md
+
 ## Commands
 
 | Command | What it does |

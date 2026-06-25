@@ -1,51 +1,71 @@
-import Image from "next/image";
-import type { Course } from "@/types/course";
+import Image from "next/image"
+import type { Course } from "@/types/course"
 
 type Props = {
-  courses: Course[];
+  courses: Course[]
 }
 
 const FeaturesCourse = ({ courses }: Props) => {
   return (
-    <div className="flex min-h-screen items-center justify-center px-6 py-20">
-      <div className="w-full grow sm:max-w-(--breakpoint-md) lg:max-w-(--breakpoint-lg)">
-        <h2 className="mx-auto text-center font-medium text-4xl tracking-[-0.045em] sm:text-[2.75rem]/[1.2]">
+    <section className="mx-auto max-w-7xl px-6 py-14 sm:py-20">
+      {/* Section header */}
+      <div className="mb-12 text-center">
+        <div className="mb-3 font-mono text-[11px] tracking-[0.15em] text-primary">
+          // LEARNING
+        </div>
+        <h2 className="font-heading text-balance text-3xl font-bold tracking-tight sm:text-4xl">
           หลักสูตรทั้งหมด
         </h2>
-        <p className="mt-3 text-pretty text-center text-lg text-muted-foreground tracking-[-0.01em] sm:text-2xl">
-          No complex configs. Just copy, paste, and start building
+        <p className="mt-2 text-muted-foreground">
+          เนื้อหาเข้าใจง่าย ปฏิบัติได้จริง
         </p>
-        <div className="mt-18 grid w-full gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-          {courses.map((course) => (
-            <div
-              className="flex w-full flex-col text-start"
-              key={course.title}
-            >
-              <div className="relative mb-5 aspect-4/5 w-full overflow-hidden rounded-xl sm:mb-6">
+      </div>
+
+      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {courses.map((course, i) => (
+          <article
+            key={course.title}
+            className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card transition-all duration-300 hover:border-cyan-500/30 hover:shadow-[0_0_24px_rgba(6,182,212,0.08)]"
+          >
+            {/* Top accent */}
+            <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+            <div className="p-5">
+              <div className="relative mb-4 aspect-[4/3] w-full overflow-hidden rounded-xl bg-muted">
                 <Image
                   alt={course.title}
-                  className="size-full bg-muted object-cover"
+                  className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
                   width={0}
                   height={0}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   src={course.picture}
-                  loading="eager"
                 />
+                {/* Index badge */}
+                <div className="absolute left-2 top-2 flex h-7 w-7 items-center justify-center rounded-full border border-border/60 bg-background/80 font-mono text-[11px] font-bold text-muted-foreground backdrop-blur-sm">
+                  {String(i + 1).padStart(2, "0")}
+                </div>
               </div>
-              <div className="px-1">
-                <span className="font-medium text-[22px] tracking-[-0.015em]">
+
+              <div className="space-y-2">
+                <h3 className="font-heading text-lg font-semibold tracking-tight">
                   {course.title}
-                </span>
-                <p className="mt-1 max-w-[25ch] text-[17px] text-muted-foreground">
+                </h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">
                   {course.detail}
                 </p>
               </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
 
-export default FeaturesCourse;
+              {/* Bottom bar */}
+              <div className="mt-4 flex items-center gap-2 border-t border-border/40 pt-4 font-mono text-[10px] tracking-wider text-muted-foreground">
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-cyan-500 shadow-[0_0_6px_rgba(6,182,212,0.5)]" />
+                COURSE-{String(i + 1).padStart(2, "0")}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+export default FeaturesCourse

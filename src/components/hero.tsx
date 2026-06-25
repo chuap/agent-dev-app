@@ -1,43 +1,78 @@
-import { ArrowUpRight, CirclePlay } from "lucide-react";
-import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
 
 export default function Hero() {
   return (
-    <div className="flex min-h-screen items-center justify-center px-6">
+    <section className="relative flex min-h-[85vh] items-center justify-center overflow-hidden px-6">
+      {/* Grid background */}
+      <div className="pointer-events-none absolute inset-0 bg-[image:linear-gradient(rgba(37,99,235,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(37,99,235,0.03)_1px,transparent_1px)] bg-[size:48px_48px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,black,transparent)]" />
 
-      <div className="relative z-10 max-w-3xl text-center">
+      {/* Glow orbs */}
+      <div className="pointer-events-none absolute left-1/2 top-1/4 h-72 w-72 -translate-x-1/2 rounded-full bg-primary/10 blur-[120px]" />
+      <div className="pointer-events-none absolute right-1/4 top-1/3 h-48 w-48 rounded-full bg-cyan-500/8 blur-[100px]" />
+
+      <div className="relative z-10 mx-auto max-w-4xl text-center">
+        {/* Terminal-style badge */}
         <Badge
-          asChild
-          className="rounded-full border-border py-1"
-          variant="secondary"
+          variant="outline"
+          className="mb-6 rounded-full border-primary/20 font-mono text-[11px] tracking-[0.12em] uppercase text-primary"
         >
-          <Link href="#">
-            Just released v1.0.0 <ArrowUpRight className="ml-1 size-4" />
-          </Link>
+          <span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_rgba(34,197,94,0.5)]" />
+          INVAPP V5 · Intelligence Terminal
         </Badge>
 
-        <h1 className="mx-auto mt-6 max-w-xl font-medium text-4xl tracking-[-0.04em] sm:text-[2.75rem] md:text-6xl/[1.2]">
-          Ship better UI without&nbsp;the&nbsp;hassle
+        <h1 className="font-heading text-balance text-4xl font-bold leading-[1.15] tracking-tight sm:text-5xl md:text-6xl">
+          สร้างร้านค้าออนไลน์
+          <br />
+          <span className="bg-gradient-to-r from-primary via-cyan-500 to-primary bg-clip-text text-transparent">
+            ด้วย Next.js 16
+          </span>
         </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-muted-foreground text-xl md:text-2xl/normal">
-          Instead of starting from scratch every time, use thoughtfully designed
-          blocks that give you a solid foundation for any UI.
+
+        <p className="mx-auto mt-6 max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg md:text-xl">
+          เรียนรู้การพัฒนา e-commerce แบบครบวงจร ตั้งแต่ระบบสมาชิก สินค้า
+          ตะกร้าสินค้า ไปจนถึงแดชบอร์ดผู้ดูแล
         </p>
-        <div className="mt-12 flex items-center justify-center gap-4">
-          <Button className="rounded-full" size="lg">
-            Get Started <ArrowUpRight className="h-5! w-5!" />
+
+        {/* Metrics row */}
+        <div className="mt-10 flex items-center justify-center gap-8">
+          {[
+            { label: "PRODUCTS", value: "12+" },
+            { label: "COURSES", value: "8" },
+            { label: "STACK", value: "Next 16" },
+          ].map((m) => (
+            <div key={m.label} className="text-center">
+              <div className="font-mono text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+                {m.value}
+              </div>
+              <div className="mt-0.5 font-mono text-[10px] tracking-[0.15em] text-muted-foreground">
+                // {m.label}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-10 flex items-center justify-center gap-4">
+          <Button asChild size="lg" className="rounded-full px-8">
+            <Link href="/product">
+              เริ่มต้นเรียน
+            </Link>
           </Button>
-          <Button
-            className="rounded-full shadow-none"
-            size="lg"
-            variant="outline"
-          >
-            <CirclePlay className="h-5! w-5!" /> Watch Demo
+          <Button asChild variant="outline" size="lg" className="rounded-full px-8 shadow-none">
+            <Link href="/course">
+              ดูหลักสูตร
+            </Link>
           </Button>
         </div>
+
+        {/* Terminal prompt */}
+        <div className="mx-auto mt-12 max-w-md rounded-xl border border-border/50 bg-muted/30 px-5 py-3 text-left font-mono text-[13px] leading-relaxed text-muted-foreground">
+          <span className="text-emerald-500">❯</span>{" "}
+          <span className="text-foreground/80">npx create-next-app</span>
+          <span className="ml-2 animate-pulse text-emerald-500">▌</span>
+        </div>
       </div>
-    </div>
-  );
+    </section>
+  )
 }
