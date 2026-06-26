@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Controller, useForm } from "react-hook-form"
-import * as z from "zod"
+import * as z from "zod/v4"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -21,7 +21,9 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { authClient } from "@/lib/auth-client"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { toast } from "sonner"
 
 const loginSchema = z.object({
   email: z
@@ -52,12 +54,12 @@ export default function LoginForm() {
           password: data.password,
          }, {
             onSuccess: () => {
-              alert('เข้าระบบสำเร็จ');
-              router.replace('/');
-            },
-            onError: (ctx) => {
-              alert(JSON.stringify(ctx.error));
-            }
+               toast.success('เข้าระบบสำเร็จ');
+               router.replace('/');
+             },
+             onError: (ctx) => {
+               toast.error(ctx.error.message || 'เกิดข้อผิดพลาด');
+             }
          });
   }
 
@@ -146,9 +148,9 @@ export default function LoginForm() {
         </Button>
         <p className="text-center text-sm text-muted-foreground">
           ยังไม่มีบัญชี?{" "}
-          <a href="/signup" className="underline underline-offset-4 hover:text-primary">
-            สมัครสมาชิก
-          </a>
+           <Link href="/signup" className="underline underline-offset-4 hover:text-primary">
+             สมัครสมาชิก
+           </Link>
         </p>
       </CardFooter>
     </Card>
