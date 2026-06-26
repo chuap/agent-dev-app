@@ -20,8 +20,8 @@ const promptFont = Prompt({
 });
 
 export const metadata: Metadata = {
-  title: "ระบบ E-Commerce",
-  description: "เรียนรู้การเขียน Nex.tjs",
+  title: "ระบบ E-Commerce | eCommerce" ,
+  description: "ระบบ E-Commerce สำหรับการจัดการร้านค้าออนไลน์",
 };
 
 export default function RootLayout({

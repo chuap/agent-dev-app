@@ -67,7 +67,7 @@ export default function LoginForm() {
   <div className="min-h-screen flex items-center justify-center">
     <Card className="w-full sm:max-w-md">
       <CardHeader>
-        <CardTitle>เข้าสู่ระบบ</CardTitle>
+        <CardTitle>เข้าสู่ระบบ APP</CardTitle>
         <CardDescription>
           กรอกอีเมลและรหัสผ่านเพื่อเข้าสู่ระบบ
         </CardDescription>
