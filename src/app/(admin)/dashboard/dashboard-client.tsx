@@ -46,11 +46,11 @@ export default function DashboardClient() {
   useEffect(() => {
     fetchStatsData()
       .then(data => { setStats(data); setStatsError(null) })
-      .catch((error) => setStatsError("โหลดข้อมูลสถิติไม่สำเร็จ"))
+      .catch(() => setStatsError("โหลดข้อมูลสถิติไม่สำเร็จ"))
       .finally(() => setStatsLoading(false))
 
     fetchOrdersData()
-      .then(setOrders)
+      .then(setOrders) 
       .catch(() => {})
       .finally(() => setOrdersLoading(false))
 
