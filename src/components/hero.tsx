@@ -72,6 +72,30 @@ export default function Hero() {
           <span className="text-foreground/80">npx create-next-app</span>
           <span className="ml-2 animate-pulse text-emerald-500">▌</span>
         </div>
+
+        {/* Quick-link menu cards */}
+        <div className="mt-14 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          {[
+            { href: "/product", label: "สินค้า", icon: "⊞", desc: "product" },
+            { href: "/cart", label: "ตะกร้า", icon: "⊡", desc: "cart" },
+            { href: "/about", label: "เกี่ยวกับ", icon: "◈", desc: "about" },
+            { href: "/contact", label: "ติดต่อ", icon: "◎", desc: "contact" },
+          ].map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="group flex flex-col items-center gap-1.5 rounded-xl border border-border/40 bg-muted/20 px-3 py-4 font-mono text-[11px] tracking-wider text-muted-foreground transition-all duration-200 hover:border-cyan-500/30 hover:bg-muted/40 hover:text-foreground hover:shadow-[0_0_16px_rgba(6,182,212,0.06)]"
+            >
+              <span className="text-lg text-primary/70 transition-colors group-hover:text-primary">
+                {item.icon}
+              </span>
+              <span>{item.label}</span>
+              <span className="text-[9px] text-muted-foreground/50">
+                // {item.desc}
+              </span>
+            </Link>
+          ))}
+        </div>
       </div>
     </section>
   )
