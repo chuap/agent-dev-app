@@ -11,7 +11,7 @@ const FeaturesCourse = ({ courses }: Props) => {
       {/* Section header */}
       <div className="mb-12 text-center">
         <div className="mb-3 font-mono text-[11px] tracking-[0.15em] text-primary">
-          // LEARNING
+          {/* LEARNING */}
         </div>
         <h2 className="font-heading text-balance text-3xl font-bold tracking-tight sm:text-4xl">
           หลักสูตรทั้งหมด

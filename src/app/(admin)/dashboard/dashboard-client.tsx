@@ -24,63 +24,53 @@ export default function DashboardClient() {
   const [orders, setOrders] = useState<AdminOrderItem[]>([])
   const [ordersLoading, setOrdersLoading] = useState(true)
 
-  const fetchStats = useCallback(async () => {
-    try {
-      const res = await fetch("/api/admin/stats")
-      if (!res.ok) throw new Error("Failed to fetch stats")
-      const data: AdminStats = await res.json()
-      setStats(data)
-      setStatsError(null)
-    } catch {
-      setStatsError("โหลดข้อมูลสถิติไม่สำเร็จ")
-    } finally {
-      setStatsLoading(false)
-    }
+  const fetchStatsData = useCallback(async (): Promise<AdminStats> => {
+    const res = await fetch("/api/admin/stats")
+    if (!res.ok) throw new Error("Failed to fetch stats")
+    return res.json()
   }, [])
 
-  const fetchRevenue = useCallback(async (p: Period) => {
-    setRevenueLoading(true)
-    try {
-      const res = await fetch(`/api/admin/revenue?period=${p}`)
-      if (!res.ok) throw new Error("Failed to fetch revenue")
-      const data: RevenuePoint[] = await res.json()
-      setRevenue(data)
-    } catch {
-      // silent
-    } finally {
-      setRevenueLoading(false)
-    }
+  const fetchRevenueData = useCallback(async (p: Period): Promise<RevenuePoint[]> => {
+    const res = await fetch(`/api/admin/revenue?period=${p}`)
+    if (!res.ok) throw new Error("Failed to fetch revenue")
+    return res.json()
   }, [])
 
-  const fetchOrders = useCallback(async () => {
-    try {
-      const res = await fetch("/api/admin/orders?limit=5")
-      if (!res.ok) throw new Error("Failed to fetch orders")
-      const data: { orders: AdminOrderItem[] } = await res.json()
-      setOrders(data.orders)
-    } catch {
-      // silent
-    } finally {
-      setOrdersLoading(false)
-    }
+  const fetchOrdersData = useCallback(async (): Promise<AdminOrderItem[]> => {
+    const res = await fetch("/api/admin/orders?limit=5")
+    if (!res.ok) throw new Error("Failed to fetch orders")
+    const data: { orders: AdminOrderItem[] } = await res.json()
+    return data.orders
   }, [])
 
   useEffect(() => {
-    fetchStats()
-    fetchOrders()
-  }, [fetchStats, fetchOrders])
+    fetchStatsData()
+      .then(data => { setStats(data); setStatsError(null) })
+      .catch((error) => setStatsError("โหลดข้อมูลสถิติไม่สำเร็จ"))
+      .finally(() => setStatsLoading(false))
 
-  useEffect(() => {
-    fetchRevenue(period)
-  }, [period, fetchRevenue])
+    fetchOrdersData()
+      .then(setOrders)
+      .catch(() => {})
+      .finally(() => setOrdersLoading(false))
 
-  useEffect(() => {
     const interval = setInterval(() => {
-      fetchStats()
-      fetchOrders()
+      fetchStatsData()
+        .then(data => { setStats(data); setStatsError(null) })
+        .catch(() => setStatsError("โหลดข้อมูลสถิติไม่สำเร็จ"))
+      fetchOrdersData()
+        .then(setOrders)
+        .catch(() => {})
     }, 30_000)
     return () => clearInterval(interval)
-  }, [fetchStats, fetchOrders])
+  }, [fetchStatsData, fetchOrdersData])
+
+  useEffect(() => {
+    fetchRevenueData(period)
+      .then(setRevenue)
+      .catch(() => {})
+      .finally(() => setRevenueLoading(false))
+  }, [period, fetchRevenueData])
 
   return (
     <div className="mx-auto max-w-7xl space-y-8 px-4 py-8 sm:px-6 lg:px-8">
@@ -125,7 +115,7 @@ export default function DashboardClient() {
             <span>{statsError}</span>
             <button
               type="button"
-              onClick={fetchStats}
+              onClick={() => fetchStatsData().then(data => { setStats(data); setStatsError(null) }).catch(() => setStatsError("โหลดข้อมูลสถิติไม่สำเร็จ"))}
               className="ml-3 rounded-lg bg-destructive/10 px-3 py-1.5 text-xs font-medium text-destructive hover:bg-destructive/20 transition-colors"
             >
               ลองใหม่

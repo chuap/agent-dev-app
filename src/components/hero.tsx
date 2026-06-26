@@ -47,7 +47,7 @@ export default function Hero() {
                 {m.value}
               </div>
               <div className="mt-0.5 font-mono text-[10px] tracking-[0.15em] text-muted-foreground">
-                // {m.label}
+                {/* {m.label} */}
               </div>
             </div>
           ))}
@@ -91,7 +91,7 @@ export default function Hero() {
               </span>
               <span>{item.label}</span>
               <span className="text-[9px] text-muted-foreground/50">
-                // {item.desc}
+                {/* {item.desc} */}
               </span>
             </Link>
           ))}

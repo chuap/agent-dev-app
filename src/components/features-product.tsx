@@ -46,7 +46,7 @@ const FeaturesProduct = ({ products }: Props) => {
       {/* Section header */}
       <div className="mb-12 text-center">
         <div className="mb-3 font-mono text-[11px] tracking-[0.15em] text-primary">
-          // CATALOG
+          {/* CATALOG */}
         </div>
         <h2 className="font-heading text-balance text-3xl font-bold tracking-tight sm:text-4xl">
           สินค้าทั้งหมด
@@ -63,7 +63,6 @@ const FeaturesProduct = ({ products }: Props) => {
       ) : (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((product) => {
-            const score = ((product.id * 7 + 13) % 41) + 60
             return (
               <article
                 key={product.id}

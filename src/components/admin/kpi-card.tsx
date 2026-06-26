@@ -17,10 +17,7 @@ export function KpiCard({ label, value, icon, trend }: KpiCardProps) {
   const numericValue = typeof value === "number" ? value : Number(String(value).replace(/[^0-9.]/g, ""))
 
   useEffect(() => {
-    if (!numericValue) {
-      setDisplayValue(numericValue)
-      return
-    }
+    if (!numericValue) return
     const duration = 800
     const steps = 20
     const increment = numericValue / steps
